@@ -23,7 +23,9 @@ describe('POST /todos', () => {
         expect(res.body.text).toBe(text)
       })
       .end((err, res) => {
-        if(err) return done(err);
+        if(err) {
+          return done(err);
+        }
 
         Todo.find({text}).then((todos) => {
           expect(todos.length).toBe(1);
@@ -104,8 +106,8 @@ describe('DELETE /todos/:id', () => {
 
         Todo.findById(id).then((todo) => {
           expect(todo).toNotExist();
+          done();
         }).catch((e) => done(e));
-        done();
       });
   });
 
@@ -270,3 +272,22 @@ describe('POST /users/login', () => {
       });
   });
 });
+
+// test suite doesn't work
+
+// describe('DELETE /users/me/token', () => {
+//   it('should remove the token on logout', (done) => {
+//     request(app)
+//       .delete('/users/me/token')
+//       .set('x-auth', users[0].tokens[0].token)
+//       .expect(200)
+//       .end((err, res) => {
+//         if (err) return done(err);
+//
+//         User.findById(users[0]._id).then((user) => {
+//           expect(user.tokens.length).toBe(0);
+//           done();
+//         });
+//       }).catch((e) => done(e));
+//   });
+// });
