@@ -12,7 +12,7 @@ const users = [{
   password: 'password4user1',
   tokens: [{
     access: 'auth',
-    token: jwt.sign({_id: userOneID, access: 'auth'}, 'abc456').toString()
+    token: jwt.sign({_id: userOneID, access: 'auth'}, precess.env.JWT_SECRET).toString()
   }]
 }, {
   _id: userTwoID,
@@ -20,7 +20,7 @@ const users = [{
   password: 'password4user2',
   tokens: [{
     access: 'auth',
-    token: jwt.sign({_id: userTwoID, access: 'auth'}, 'abc456').toString()
+    token: jwt.sign({_id: userTwoID, access: 'auth'}, precess.env.JWT_SECRET).toString()
   }]
 }];
 
